@@ -4,7 +4,7 @@ const Button = ({ text, type }) => {
     return (
         <>
             <div className="button-container">
-                <button type="type">{text}</button>
+                <button type={type}>{text}</button>
             </div>
         </>
     )
