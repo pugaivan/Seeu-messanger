@@ -1,0 +1,15 @@
+.input-container {
+    display: grid;
+    justify-content: center;
+    gap: 5px;
+}
+
+input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid var(--default-input-color);
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 10px;
+}

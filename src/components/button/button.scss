@@ -1,0 +1,15 @@
+.button-container {
+    display: grid;
+    justify-content: center;
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    border: 2px solid var(--default-input-color);
+    border-radius: 8px;
+    outline: none;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
