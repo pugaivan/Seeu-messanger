@@ -8,17 +8,25 @@ import "./login.scss"
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [password, setPassword] = useState(null);
+  const [errors, setErrros] = useState({});
 
-  const onPhoneChange = event => setPhoneNumber(event.target.value);
-  const onPasswordChange = event => setPassword(event.target.value);
+  const onPhoneChange = (event) => setPhoneNumber(event.target.value);
+  const onPasswordChange = (event) => setPassword(event.target.value);
 
-  console.log(password, phoneNumber)
+
+  const checkValid = (event) =>{
+    event.preventDefault();
+    if(!phoneNumber){
+      errors.phone = { message: 'phone is required' }
+      setErrros(errors)
+    }
+  }
   
  return (
   <div>
     <div className="form-container">
       <h2>log in</h2>
-      <form>
+      <form onSubmit={checkValid}>
       <Input  placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} />
       <Input  placeholder="Password" id="password" label="Your password" type="password" onChange={onPasswordChange}/>
       <Link text="Don't have an account yet?" link="http://localhost:3000/registration" type="Register"/>
