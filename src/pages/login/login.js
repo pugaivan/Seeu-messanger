@@ -1,7 +1,7 @@
 import Button from "../../components/button/button"
 import Input from "../../components/input/input"
 import Link from "../../components/link/link"
-import React, { useState } from "react"
+import React, { useState } from "react";
 import "./login.scss"
 
 
@@ -22,11 +22,12 @@ const Login = () => {
       <Input  placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} />
       <Input  placeholder="Password" id="password" label="Your password" type="password" onChange={onPasswordChange}/>
       <Link text="Don't have an account yet?" link="http://localhost:3000/registration" type="Register"/>
-      <Button text="Log in" type="submit" />
+      <Button text="Log in"/>
       </form>
     </div>
   </div>
 )
 }
+
 
 export default Login
