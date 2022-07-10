@@ -1,14 +1,15 @@
 import "./input.scss"
 import PropTypes from 'prop-types';
 
-const Input = ({ label, placeholder, id, type, onChange, errors, name }) => {
+const Input = ({ label, placeholder, id, type, onChange, errors, name, children }) => {
 
     const isInvalid = !!errors[name];
 
     return (
-        <div className="input-container">
+        <div className={`input-container ${isInvalid && "is-invalid"}`}>
             <label htmlFor={id}>{label}</label>
             <input id={id} placeholder={placeholder} type={type} onChange={onChange} name={name}></input>
+            {children && <div className="input-button">{children}</div>}
             {isInvalid && (<h4>{errors[name].message}</h4>)}
         </div>
     )
@@ -21,7 +22,8 @@ Input.propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func,
     errors: PropTypes.object,
-    name: PropTypes.string
+    name: PropTypes.string,
+    children: PropTypes.node
 };
 
 export default Input

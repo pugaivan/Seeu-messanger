@@ -1,13 +1,13 @@
 .input-container {
     display: grid;
-    justify-content: center;
-    gap: 5px;
-    width: var(--default-form-width);
+    margin: auto;
     margin-bottom: 15px;
+    max-width: 350px;
+    gap: 5px;
+    position: relative;
 }
 
 input {
-    width: 300px;
     padding: 10px;
     border: 2px solid var(--default-input-border-color);
     border-radius: 8px;
@@ -17,6 +17,22 @@ input {
 
 h4 {
     margin: 0px;
-    color: var(--default-warning-color);
+    color: var(--error-message-color);
     font-size: 12px;
+}
+
+input:focus {
+    border: 2px solid var(--focus-input-border-color);
+}
+
+.is-invalid {
+    input {
+        border: 2px solid var(--error-message-color);
+    }
+}
+
+.input-button {
+    position: absolute;
+    right: 15px;
+    top: 35px;
 }
