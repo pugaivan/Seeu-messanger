@@ -3,6 +3,10 @@ import Input from "../../components/input/input"
 import Link from "../../components/link/link"
 import React, { useState } from "react";
 import "./login.scss"
+import { validate } from "../../utils/validation";
+import PasswordInput from "../../components/passwordInput/passwordInput";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Registration from "../registration/registration";
 
 
 const Login = () => {
@@ -13,44 +17,43 @@ const Login = () => {
   const onPhoneChange = (event) => setPhoneNumber(event.target.value);
   const onPasswordChange = (event) => setPassword(event.target.value);
 
-
   const formSubmin = (event) => {
     event.preventDefault();
-    isFormValid();
 
+    const validationErrors = validate({
+      phoneNumber: {
+        required: true,
+        value: phoneNumber
+      },
+      password: {
+        required: true,
+        value: password
+      }
+    }, { ...errors })
+    setErrros({ ...validationErrors })
   }
 
-  const isFormValid = () => {
-    let isAnyErrors = false
-    if (!phoneNumber) {
-      isAnyErrors = true
-      errors['phone'] = { message: 'phone is required' }
-      setErrros({ ...errors })
-    }
-    if (!password) {
-      isAnyErrors = true
-      errors['password'] = { message: 'password is required' }
-      setErrros({ ...errors })
-    }
-    if (!isAnyErrors) {
-      setErrros({})
-    }
-  }
+  const navigate = useNavigate();
+  const navigateToContacts = () => {
+    navigate('/registration');
+  };
 
   return (
     <div>
       <div className="form-container">
         <h2>log in</h2>
         <form onSubmit={formSubmin}>
-          <Input placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} errors={errors} name="phone" />
-          <Input placeholder="Password" id="password" label="Your password" type="password" onChange={onPasswordChange} errors={errors} name="password" />
-          <Link text="Don't have an account yet?" link="http://localhost:3000/registration" type="Register" />
+          <Input placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} errors={errors} name="phoneNumber" />
+          <PasswordInput placeholder="Password" id="password" label="Your password" onChange={onPasswordChange} errors={errors} name="password" />
+          <Link text="Don't have an account yet?" onClick={navigateToContacts} type="Register" />
           <Button text="Log in" />
+          <Routes>
+            <Route path="/registration" element={<Registration />} />
+          </Routes>
         </form>
       </div>
     </div>
   )
 }
-
 
 export default Login

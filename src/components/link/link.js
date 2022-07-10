@@ -1,9 +1,9 @@
 import "./link.scss"
 
-const Link = ({text, link, type}) => {
+const Link = ({ text, onClick, type }) => {
     return (
         <>
-           <div className="link-container">{text}<a href={link}><span>{type}</span></a></div>
+            <div className="link-container">{text}<button onClick={onClick}>{type}</button></div>
         </>
     )
 }
