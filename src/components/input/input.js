@@ -2,7 +2,6 @@ import "./input.scss"
 import PropTypes from 'prop-types';
 
 const Input = ({ label, placeholder, id, type, onChange, errors, name, children }) => {
-
     const isInvalid = !!errors[name];
 
     return (
