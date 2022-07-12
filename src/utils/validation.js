@@ -1,3 +1,6 @@
+import { FORM_FIELDS } from "./constans"
+const { PHONE, PASSWORD, FIRSTNAME, LASTNAME } = FORM_FIELDS;
+
 export const validate = (values, errors) => {
     Object.keys(values).map((key) => {
         console.log(values[key].value)
@@ -18,19 +21,19 @@ export const validate = (values, errors) => {
 
 const getValidationRule = (field) => {
     const rules = {
-        phoneNumber: {
+        [PHONE]: {
             value: /^[0-9]*$/,
             message: 'phone must contain only numbers'
         },
-        password: {
+        [PASSWORD]: {
             value: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+){6,}$/,
             message: "Your password must be at least 6 characters, and include at least one letter and a number"
         },
-        firstName: {
+        [FIRSTNAME]: {
             value: /^[a-zA-Z]+$/g,
             message: 'name must contain only letters'
         },
-        lastName: {
+        [LASTNAME]: {
             value: /^[a-zA-Z]+$/g,
             message: 'last name must contain only letters'
         }

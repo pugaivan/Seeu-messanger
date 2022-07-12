@@ -1,0 +1,31 @@
+.link-container {
+    text-align: center;
+}
+
+.link-container {
+    .link-pages {
+        width: 150px;
+        padding: 10px;
+        border: 2px solid var(--default-input-border-color);
+        border-radius: 8px;
+        outline: none;
+        font-size: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        display: grid;
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        text-decoration: none;
+    }
+
+    .link-pages:focus {
+        color: var(--default-button-color);
+        border: 2px solid var(--default-button-color);
+    }
+
+    .link-pages:active {
+        text-decoration: none;
+        color: var(--default-button-color);
+    }
+}
