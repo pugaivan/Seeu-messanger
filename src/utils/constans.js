@@ -5,3 +5,9 @@ export const FORM_FIELDS =
     FIRSTNAME: 'firstName',
     LASTNAME: 'lastName'
 }
+
+
+export const PATH = {
+    LOGIN: '/login',
+    REGISER: '/registration'
+}
