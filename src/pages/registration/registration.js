@@ -5,6 +5,7 @@ import Button from "../../components/button/button"
 import PasswordInput from "../../components/passwordInput/passwordInput"
 import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
+import { createUser } from "../../service/api";
 import "./registration.scss"
 
 const { LOGIN } = PATH;
@@ -22,8 +23,18 @@ const Registration = () => {
   const onFirstNameChange = event => setFirstName(event.target.value);
   const onLastNameChange = event => setFastName(event.target.value);
 
-  const formSubmin = (event) => {
+  const formSubmit = async (event) => {
     event.preventDefault();
+    if (!errors) {
+      await createUser({
+        phoneNumber,
+        password,
+        lastName,
+        firstName
+      })
+    } else {
+      console.log("ERROR!"); // will not be here, only for check status;
+    }
 
     const validationErrors = validate({
       [PHONE]: {
@@ -50,11 +61,11 @@ const Registration = () => {
     <div>
       <div className="form-container">
         <h2>Registration</h2>
-        <form onSubmit={formSubmin}>
+        <form onSubmit={formSubmit}>
           <Input placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onRegistrationNumberChange} errors={errors} name={PHONE} />
-          <PasswordInput placeholder="Password" id="password" label="Your password" type="password" onChange={onRegistrationPasswordChange} errors={errors} name={PASSWORD} />
           <Input placeholder="First name" id="first-name" label="Your first name" type="text" onChange={onFirstNameChange} errors={errors} name={FIRSTNAME} />
           <Input placeholder="Last name" id="last-name" label="Your last name" type="text" onChange={onLastNameChange} errors={errors} name={LASTNAME} />
+          <PasswordInput placeholder="Password" id="password" label="Your password" type="password" onChange={onRegistrationPasswordChange} errors={errors} name={PASSWORD} />
           <div className="link-container">
             Do you already have an account? <Link to={LOGIN} className="link-pages">Log in</Link>
           </div>
