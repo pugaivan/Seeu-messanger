@@ -3,7 +3,6 @@ const { PHONE, PASSWORD, FIRSTNAME, LASTNAME } = FORM_FIELDS;
 
 export const validate = (values, errors) => {
     Object.keys(values).map((key) => {
-        console.log(values[key].value)
         const validationRule = getValidationRule(key)
         const validationRegex = new RegExp(validationRule.value)
         if (values[key].required && !values[key].value) {
