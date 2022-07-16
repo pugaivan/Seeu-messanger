@@ -1,11 +1,12 @@
 import React, { useState } from "react"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from "../../components/input/input"
 import Button from "../../components/button/button"
 import PasswordInput from "../../components/passwordInput/passwordInput"
 import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { createUser } from "../../service/api";
+import { isObjectEmpty } from "../../utils/helper"
 import "./registration.scss"
 
 const { LOGIN } = PATH;
@@ -17,7 +18,7 @@ const Registration = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setFastName] = useState(null);
   const [errors, setErrros] = useState({});
-  const [staus, setStatus] = useState("");
+  const navigate = useNavigate();
 
   const onRegistrationNumberChange = event => setRegistrationNumber(event.target.value);
   const onRegistrationPasswordChange = event => setRegistrationPassword(event.target.value);
@@ -46,17 +47,16 @@ const Registration = () => {
       }
     }, { ...errors })
     setErrros({ ...validationErrors })
-    setStatus('')
 
-    if (Object.keys(validationErrors).length === 0) {
+    if (isObjectEmpty(validationErrors)) {
       await createUser({
         phoneNumber,
         password,
         lastName,
         firstName
       })
-      setStatus('Аccount has been successfully registered')
     }
+    navigate(LOGIN)
   }
 
   return (
@@ -68,7 +68,6 @@ const Registration = () => {
           <Input placeholder="First name" id="first-name" label="Your first name" type="text" onChange={onFirstNameChange} errors={errors} name={FIRSTNAME} />
           <Input placeholder="Last name" id="last-name" label="Your last name" type="text" onChange={onLastNameChange} errors={errors} name={LASTNAME} />
           <PasswordInput placeholder="Password" id="password" label="Your password" type="password" onChange={onRegistrationPasswordChange} errors={errors} name={PASSWORD} />
-          <h5>{staus}</h5>
           <div className="link-container">
             Do you already have an account? <Link to={LOGIN} className="link-pages">Log in</Link>
           </div>

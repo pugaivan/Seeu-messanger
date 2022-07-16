@@ -1,6 +1,6 @@
 import Input from "../input/input"
 import React, { useState } from "react"
-import { IMAGE_STYLE } from "../../utils/constans"
+import { DEFAULT_ICON_SIZE } from "../../utils/constans"
 import "./passwordInput.scss"
 
 const PasswordInput = (props) => {
@@ -11,7 +11,11 @@ const PasswordInput = (props) => {
     }
 
     return (
-        <Input {...props} type={isPasswordShown ? "text" : "password"} ><button className="images-container" type="button" onClick={onShowPassword}><img src={`/images/${isPasswordShown ? 'hide.png' : 'show.jpg'}`} width={IMAGE_STYLE} height={IMAGE_STYLE} /></button></Input>
+        <Input {...props} type={isPasswordShown ? "text" : "password"} >
+            <button className="images-container" type="button" onClick={onShowPassword}>
+                <img src={`/images/${isPasswordShown ? 'hide.png' : 'show.jpg'}`} width={DEFAULT_ICON_SIZE} height={DEFAULT_ICON_SIZE} />
+            </button>
+        </Input>
     )
 }
 

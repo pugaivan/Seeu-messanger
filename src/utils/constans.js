@@ -11,4 +11,5 @@ export const PATH = {
     REGISER: '/registration'
 }
 
-export const IMAGE_STYLE = "24px";
+export const DEFAULT_ICON_SIZE = "24px";
+
