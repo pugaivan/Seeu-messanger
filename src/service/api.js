@@ -10,3 +10,10 @@ export const createUser = async (data) => {
 
     return res
 }
+
+
+export const loginUser = async (data) => {
+    const res = await apiCLient.post(`/login`, data)
+
+    return res
+}

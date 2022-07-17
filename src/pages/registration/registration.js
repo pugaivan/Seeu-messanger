@@ -55,8 +55,8 @@ const Registration = () => {
         lastName,
         firstName
       })
+      navigate(LOGIN)
     }
-    navigate(LOGIN)
   }
 
   return (
