@@ -18,6 +18,7 @@ const Registration = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setFastName] = useState(null);
   const [errors, setErrros] = useState({});
+  const [errorMessage, seterrorMessage] = useState("");
   const navigate = useNavigate();
 
   const onRegistrationNumberChange = event => setRegistrationNumber(event.target.value);
@@ -49,12 +50,20 @@ const Registration = () => {
     setErrros({ ...validationErrors })
 
     if (isObjectEmpty(validationErrors)) {
-      await createUser({
+      const response = await createUser({
         phoneNumber,
         password,
         lastName,
         firstName
       })
+<<<<<<< Updated upstream
+=======
+      if (response.isSuccessful) {
+        navigate(LOGIN)
+      } else {
+        seterrorMessage(response.data.response.data.errorMessage)
+      }
+>>>>>>> Stashed changes
     }
     navigate(LOGIN)
   }
@@ -68,6 +77,7 @@ const Registration = () => {
           <Input placeholder="First name" id="first-name" label="Your first name" type="text" onChange={onFirstNameChange} errors={errors} name={FIRSTNAME} />
           <Input placeholder="Last name" id="last-name" label="Your last name" type="text" onChange={onLastNameChange} errors={errors} name={LASTNAME} />
           <PasswordInput placeholder="Password" id="password" label="Your password" type="password" onChange={onRegistrationPasswordChange} errors={errors} name={PASSWORD} />
+          <h5>{errorMessage}</h5>
           <div className="link-container">
             Do you already have an account? <Link to={LOGIN} className="link-pages">Log in</Link>
           </div>
