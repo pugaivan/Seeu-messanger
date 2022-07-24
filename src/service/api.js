@@ -30,10 +30,3 @@ export const loginUser = async (data) => {
         return { data: { errorMessage: parseErrorMessage(error) } }
     }
 }
-
-
-export const loginUser = async (data) => {
-    const res = await apiCLient.post(`/login`, data)
-
-    return res
-}
