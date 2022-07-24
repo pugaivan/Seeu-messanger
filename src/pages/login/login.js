@@ -12,7 +12,6 @@ import { loginUser } from "../../service/api";
 const { REGISER, MAIN } = PATH;
 const { PHONE, PASSWORD } = FORM_FIELDS;
 
-
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [password, setPassword] = useState(null);
@@ -52,6 +51,7 @@ const Login = () => {
       } else {
         setErrorMessage('Something went wrong, please try again later')
       }
+
     }
   }
 

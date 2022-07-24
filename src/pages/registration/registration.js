@@ -63,6 +63,7 @@ const Registration = () => {
       } else {
         setErrorMessage('Something went wrong, please try again later')
       }
+
     }
   }
 
