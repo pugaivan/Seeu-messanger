@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from "../../components/button/button"
 import Input from "../../components/input/input"
 import PasswordInput from "../../components/passwordInput/passwordInput";
 import "./login.scss"
 import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
+import { isObjectEmpty } from "../../utils/helper"
+import { loginUser } from "../../service/api";
 
-const { REGISER } = PATH;
+const { REGISER, MAIN } = PATH;
 const { PHONE, PASSWORD } = FORM_FIELDS;
 
 
@@ -15,16 +17,13 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [password, setPassword] = useState(null);
   const [errors, setErrros] = useState({});
-<<<<<<< Updated upstream
-=======
-  const [errorMessage, seterrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
->>>>>>> Stashed changes
 
   const onPhoneChange = (event) => setPhoneNumber(event.target.value);
   const onPasswordChange = (event) => setPassword(event.target.value);
 
-  const formSubmin = (event) => {
+  const formSubmin = async (event) => {
     event.preventDefault();
 
     const validationErrors = validate({
@@ -38,8 +37,6 @@ const Login = () => {
       }
     }, { ...errors })
     setErrros({ ...validationErrors })
-<<<<<<< Updated upstream
-=======
 
     if (isObjectEmpty(validationErrors)) {
       const response = await loginUser({
@@ -49,11 +46,13 @@ const Login = () => {
       if (response.isSuccessful) {
         localStorage.setItem('jwt', response.data.data.token)
         navigate(MAIN)
+      }
+      if (response.data.errorMessage) {
+        setErrorMessage(response.data.errorMessage)
       } else {
-        seterrorMessage(response.data.response.data.errorMessage)
+        setErrorMessage('Something went wrong, please try again later')
       }
     }
->>>>>>> Stashed changes
   }
 
   return (

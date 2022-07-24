@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../utils/config";
+import { parseErrorMessage } from "../utils/helper"
 
 const apiCLient = axios.create({
     baseURL: API_URL
@@ -13,11 +14,9 @@ export const createUser = async (data) => {
         return { data: res, isSuccessful: true }
     } catch (error) {
 
-        return { data: error }
+        return { data: { errorMessage: parseErrorMessage(error) } }
     }
 }
-<<<<<<< Updated upstream
-=======
 
 
 export const loginUser = async (data) => {
@@ -28,7 +27,6 @@ export const loginUser = async (data) => {
     }
     catch (error) {
 
-        return { data: error }
+        return { data: { errorMessage: parseErrorMessage(error) } }
     }
 }
->>>>>>> Stashed changes

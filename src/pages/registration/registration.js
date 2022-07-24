@@ -18,7 +18,7 @@ const Registration = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setFastName] = useState(null);
   const [errors, setErrros] = useState({});
-  const [errorMessage, seterrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const onRegistrationNumberChange = event => setRegistrationNumber(event.target.value);
@@ -56,16 +56,14 @@ const Registration = () => {
         lastName,
         firstName
       })
-<<<<<<< Updated upstream
-=======
       if (response.isSuccessful) {
         navigate(LOGIN)
+      } if (response.data.errorMessage) {
+        setErrorMessage(response.data.errorMessage)
       } else {
-        seterrorMessage(response.data.response.data.errorMessage)
+        setErrorMessage('Something went wrong, please try again later')
       }
->>>>>>> Stashed changes
     }
-    navigate(LOGIN)
   }
 
   return (
