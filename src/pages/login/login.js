@@ -43,13 +43,10 @@ const Login = () => {
         password
       })
       if (response.isSuccessful) {
-        localStorage.setItem('jwt', response.data.data.token)
+        localStorage.setItem('jwt', response.data.token)
         navigate(MAIN)
-      }
-      if (response.data.errorMessage) {
-        setErrorMessage(response.data.errorMessage)
       } else {
-        setErrorMessage('Something went wrong, please try again later')
+        setErrorMessage(response.data.errorMessage)
       }
 
     }

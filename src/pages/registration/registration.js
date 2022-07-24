@@ -58,10 +58,8 @@ const Registration = () => {
       })
       if (response.isSuccessful) {
         navigate(LOGIN)
-      } if (response.data.errorMessage) {
-        setErrorMessage(response.data.errorMessage)
       } else {
-        setErrorMessage('Something went wrong, please try again later')
+        setErrorMessage(response.data.errorMessage)
       }
 
     }

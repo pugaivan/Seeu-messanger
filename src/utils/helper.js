@@ -3,5 +3,9 @@ export const isObjectEmpty = (obj) => {
 }
 
 export const parseErrorMessage = (error) => {
-    return error.response.data.errorMessage
+    if (error?.response?.data?.errorMessage) {
+        return error.response.data.errorMessage
+    } else {
+        return 'Something went wrong, please try again later'
+    }
 }

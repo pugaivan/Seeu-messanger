@@ -11,7 +11,7 @@ export const createUser = async (data) => {
     try {
         const res = await apiCLient.post(`/create`, data)
 
-        return { data: res, isSuccessful: true }
+        return { data: res.data, isSuccessful: true }
     } catch (error) {
 
         return { data: { errorMessage: parseErrorMessage(error) } }
@@ -23,7 +23,7 @@ export const loginUser = async (data) => {
     try {
         const res = await apiCLient.post(`/login`, data)
 
-        return { data: res, isSuccessful: true }
+        return { data: res.data, isSuccessful: true }
     }
     catch (error) {
 
