@@ -1,17 +1,16 @@
-import Modal from "../components/modal/modal"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
-import "./index.scss"
+import Input from "../components/input/input";
+import Modal from "../components/modal/modal"
 import { validate } from "../utils/validation";
 import { resizeSides } from "../utils/helper"
-import Input from "../components/input/input";
-import { FORM_FIELDS } from "../utils/constans"
-import Button from "../components/button/button";
+import { FORM_FIELDS, PATH } from "../utils/constans"
+
+import "./index.scss"
 
 const { PHONE } = FORM_FIELDS;
-window.onload = function () {
-    resizeSides();
-};
+const { LOGIN } = PATH;
 
 const TABS = {
     messages: 'messages',
@@ -19,6 +18,14 @@ const TABS = {
 }
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        resizeSides();
+        if (!localStorage.getItem("jwt")) {
+            navigate(LOGIN)
+        }
+    }, [])
 
     const [isActive, setIsActive] = useState(false)
     const [activeTab, setActiveTab] = useState('messages')
@@ -37,6 +44,13 @@ const Home = () => {
         }, { ...errors })
         setErrros({ ...validationErrors })
     }
+
+    const deleteJwt = () => {
+        localStorage.removeItem('jwt');
+        navigate(LOGIN)
+
+    }
+
     return (
         <div className="page-wrapper" id="container">
             <div className="left-content" id="left_panel">
@@ -47,6 +61,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="right-content" id="right_panel" >
+                <button onClick={deleteJwt}>Log out</button>
                 <div id="drag"></div>
             </div>
 
