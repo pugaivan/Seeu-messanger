@@ -9,7 +9,7 @@ export const FORM_FIELDS =
 export const PATH = {
     LOGIN: '/login',
     REGISER: '/registration',
-    MAIN: '/'
+    HOME: '/'
 }
 
 export const DEFAULT_ICON_SIZE = "24px";
