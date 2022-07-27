@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
+import PropTypes from 'prop-types';
+import useOnClickOutside from "../../hooks/useOnClickOutside"
 import './modal.scss';
 
 
 const Modal = ({ isActive, setIsActive, children, submit }) => {
+
+    const modalRef = useRef();
+    useOnClickOutside(modalRef, () => setIsActive(false));
+
     return (
-        <div className={isActive === true ? "modal active" : "modal"} onClick={() => setIsActive(false)}>
-            <div className={isActive === true ? "modal-content active" : "modal-content"} onClick={e => e.stopPropagation()}>
-                <button onClick={() => setIsActive(false)}>X</button>
+        <div className={`modal ${isActive && '-is-active'}`} >
+            <div ref={modalRef} className={`modal-content ${isActive && '-is-active'}`}>
+                <button className="close-button" onClick={() => setIsActive(false)}>X</button>
                 {children}
                 <div className="modal-footer">
                     <button onClick={submit}>Find</button>
@@ -17,5 +23,11 @@ const Modal = ({ isActive, setIsActive, children, submit }) => {
     )
 }
 
+Modal.propTypes = {
+    setIsActive: PropTypes.func,
+    children: PropTypes.node,
+    submit: PropTypes.func,
+    isActive: PropTypes.bool
+};
 
 export default Modal

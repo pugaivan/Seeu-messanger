@@ -11,23 +11,29 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
-}
 
-.modal.active {
-    opacity: 1;
-    pointer-events: all;
+    &.-is-active {
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
 .modal-content {
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    height: 150px;
+    height: 125px;
     width: 300px;
     transform: scale(0.5);
     transition: 0.4s all;
+
+    &.-is-active {
+        transform: scale(1);
+    }
 }
 
-.modal-content.active {
-    transform: scale(1);
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
