@@ -10,16 +10,11 @@ export const parseErrorMessage = (error) => {
     }
 }
 
-export const resizeSides = () => {
+export const resizeSides = (container, left_panel, right_panel, drag) => {
     let isResizing = false;
 
     (function () {
-        const container = document.getElementById("container");
-        const left = document.getElementById("left_panel");
-        const right = document.getElementById("right_panel");
-        const handle = document.getElementById("drag");
-
-        handle.onmousedown = function (e) {
+        drag.current.onmousedown = function (e) {
             isResizing = true;
         };
 
@@ -28,10 +23,10 @@ export const resizeSides = () => {
                 return;
             }
 
-            let offsetRight = container.clientWidth - (e.clientX - container.offsetLeft);
+            let offsetRight = container.current.clientWidth - (e.clientX - container.current.offsetLeft);
 
-            left.style.right = offsetRight + "px";
-            right.style.width = offsetRight + "px";
+            left_panel.current.style.right = offsetRight + "px";
+            right_panel.current.style.width = offsetRight + "px";
         }
 
         document.onmouseup = function (e) {
