@@ -8,6 +8,7 @@ import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { createUser } from "../../service/api";
 import { isObjectEmpty } from "../../utils/helper"
+import { getStorage } from "../../utils/localStorage";
 
 import "./registration.scss"
 
@@ -25,7 +26,7 @@ const Registration = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("jwt")) {
+    if (getStorage("jwt")) {
       navigate(HOME)
     }
   }, [])

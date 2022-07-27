@@ -8,6 +8,7 @@ import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { isObjectEmpty } from "../../utils/helper"
 import { loginUser } from "../../service/api";
+import { getStorage, createStorage } from "../../utils/localStorage";
 
 import "./login.scss"
 
@@ -21,8 +22,9 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    if (localStorage.getItem("jwt")) {
+    if (getStorage("jwt")) {
       navigate(HOME)
     }
   }, [])
@@ -51,7 +53,7 @@ const Login = () => {
         password
       })
       if (response.isSuccessful) {
-        localStorage.setItem('jwt', response.data.token)
+        createStorage('jwt', response.data.token)
         navigate(HOME)
       } else {
         setErrorMessage(response.data.errorMessage)

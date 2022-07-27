@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
 
-import Input from "../components/input/input";
-import Modal from "../components/modal/modal"
-import { validate } from "../utils/validation";
+import Messages from "../components/messages/messages";
+import IsUserAuthorized from "../components/isUserAuthorized/isUserAuthorized";
 import { resizeSides } from "../utils/helper"
-import { FORM_FIELDS, PATH } from "../utils/constans"
+import { PATH } from "../utils/constans"
+import { deleteStorage, getStorage } from "../utils/localStorage";
 
 import "./index.scss"
 
-const { PHONE } = FORM_FIELDS;
 const { LOGIN } = PATH;
 
 const TABS = {
@@ -19,55 +18,37 @@ const TABS = {
 
 const Home = () => {
     const navigate = useNavigate();
+    const container = useRef();
+    const left_panel = useRef();
+    const right_panel = useRef();
+    const drag = useRef();
 
     useEffect(() => {
-        resizeSides();
-        if (!localStorage.getItem("jwt")) {
+        resizeSides(container, left_panel, right_panel, drag);
+        if (!getStorage("jwt")) {
             navigate(LOGIN)
         }
     }, [])
-
-    const [isActive, setIsActive] = useState(false)
     const [activeTab, setActiveTab] = useState('messages')
-    const [phoneNumber, setPhoneNumber] = useState(null);
-    const [errors, setErrros] = useState({});
-    const onPhoneChange = (event) => setPhoneNumber(event.target.value);
-
-    const modalSybmit = async (event) => {
-        event.preventDefault();
-
-        const validationErrors = validate({
-            [PHONE]: {
-                required: true,
-                value: phoneNumber
-            }
-        }, { ...errors })
-        setErrros({ ...validationErrors })
-    }
 
     const deleteJwt = () => {
-        localStorage.removeItem('jwt');
+        deleteStorage('jwt');
         navigate(LOGIN)
-
     }
 
     return (
-        <div className="page-wrapper" id="container">
-            <div className="left-content" id="left_panel">
-                {activeTab === 'messages' ? <div>messages</div> : <div><button onClick={() => setIsActive(true)}>Add new contact</button></div>}
+        <div className="page-wrapper" ref={container}>
+            <div className="left-content" ref={left_panel}>
+                {activeTab === 'messages' ? <Messages /> : <IsUserAuthorized />}
                 <div className="tabs-container">
-                    <button onClick={() => setActiveTab('messages')}>{TABS.messages}</button>
-                    <button onClick={() => setActiveTab('contacts')}>{TABS.contacts}</button>
+                    <button onClick={() => setActiveTab(TABS.messages)}>{TABS.messages}</button>
+                    <button onClick={() => setActiveTab(TABS.contacts)}>{TABS.contacts}</button>
                 </div>
             </div>
-            <div className="right-content" id="right_panel" >
+            <div className="right-content" ref={right_panel} >
                 <button onClick={deleteJwt}>Log out</button>
-                <div id="drag"></div>
+                <div className="drag" ref={drag}></div>
             </div>
-
-            <Modal isActive={isActive} setIsActive={setIsActive} submit={modalSybmit}>
-                <Input placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} errors={errors} name={PHONE} />
-            </Modal>
         </div>
     )
 }
