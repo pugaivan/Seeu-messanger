@@ -1,14 +1,12 @@
-export const getStorage = (key) => {
-    return localStorage.getItem(key);
+export const isUserAuthorized = (key) => {
+    return !!localStorage.getItem(key);
 }
 
-export const createStorage = (key, value) => {
+export const createJwtToken = (key, value) => {
     localStorage.setItem(key, value);
-
-
 }
 
-export const deleteStorage = (key) => {
+export const deleteJwtToken = (key) => {
     localStorage.removeItem(key);
 
 }

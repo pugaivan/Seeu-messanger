@@ -7,7 +7,7 @@ import { FORM_FIELDS } from "../../utils/constans"
 const { PHONE } = FORM_FIELDS;
 
 
-const IsUserAuthorized = () => {
+const Contacts = () => {
 
     const [modalIsActive, setModalIsActive] = useState(false)
     const [phoneNumber, setPhoneNumber] = useState(null);
@@ -27,17 +27,19 @@ const IsUserAuthorized = () => {
     }
 
     return (
-        <div className="contacts-container">
-            <div>
-                <button onClick={() => setModalIsActive(true)}>Add new contact</button></div>
-            <div>
-                contacts
+        <>
+            <div className="contacts-container">
+                <div>
+                    <button onClick={() => setModalIsActive(true)}>Add new contact</button></div>
+                <div>
+                    contacts
+                </div>
             </div>
             <Modal isActive={modalIsActive} setIsActive={setModalIsActive} submit={modalSubmit}>
                 <Input placeholder="Phone" id="phone-number" label="Phone number" type="text" onChange={onPhoneChange} errors={errors} name={PHONE} />
             </Modal>
-        </div>
+        </>
     )
 }
 
-export default IsUserAuthorized
+export default Contacts

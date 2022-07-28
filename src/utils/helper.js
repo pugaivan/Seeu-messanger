@@ -10,27 +10,25 @@ export const parseErrorMessage = (error) => {
     }
 }
 
-export const resizeSides = (container, left_panel, right_panel, drag) => {
+export const resizeSides = (container, leftPanel, rightPanel, drag) => {
     let isResizing = false;
 
-    (function () {
-        drag.current.onmousedown = function (e) {
-            isResizing = true;
-        };
+    drag.current.onmousedown = function (e) {
+        isResizing = true;
+    };
 
-        document.onmousemove = function (e) {
-            if (!isResizing) {
-                return;
-            }
-
-            let offsetRight = container.current.clientWidth - (e.clientX - container.current.offsetLeft);
-
-            left_panel.current.style.right = offsetRight + "px";
-            right_panel.current.style.width = offsetRight + "px";
+    document.onmousemove = function (e) {
+        if (!isResizing) {
+            return;
         }
 
-        document.onmouseup = function (e) {
-            isResizing = false;
-        }
-    })();
+        let offsetRight = container.current.clientWidth - (e.clientX - container.current.offsetLeft);
+
+        leftPanel.current.style.right = offsetRight + "px";
+        rightPanel.current.style.width = offsetRight + "px";
+    }
+
+    document.onmouseup = function (e) {
+        isResizing = false;
+    }
 }

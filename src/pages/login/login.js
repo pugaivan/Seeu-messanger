@@ -8,7 +8,7 @@ import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { isObjectEmpty } from "../../utils/helper"
 import { loginUser } from "../../service/api";
-import { getStorage, createStorage } from "../../utils/localStorage";
+import { isUserAuthorized, createJwtToken } from "../../utils/localStorage";
 
 import "./login.scss"
 
@@ -24,7 +24,7 @@ const Login = () => {
 
 
   useEffect(() => {
-    if (getStorage("jwt")) {
+    if (isUserAuthorized("jwt")) {
       navigate(HOME)
     }
   }, [])
@@ -53,7 +53,7 @@ const Login = () => {
         password
       })
       if (response.isSuccessful) {
-        createStorage('jwt', response.data.token)
+        createJwtToken('jwt', response.data.token)
         navigate(HOME)
       } else {
         setErrorMessage(response.data.errorMessage)
