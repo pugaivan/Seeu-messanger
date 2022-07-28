@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom';
+
 import Input from "../../components/input/input"
 import Button from "../../components/button/button"
 import PasswordInput from "../../components/passwordInput/passwordInput"
@@ -7,9 +8,12 @@ import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { createUser } from "../../service/api";
 import { isObjectEmpty } from "../../utils/helper"
+import { isUserAuthorized } from "../../utils/localStorage";
+
 import "./registration.scss"
 
-const { LOGIN } = PATH;
+
+const { LOGIN, HOME } = PATH;
 const { PHONE, PASSWORD, LASTNAME, FIRSTNAME } = FORM_FIELDS;
 
 const Registration = () => {
@@ -20,6 +24,12 @@ const Registration = () => {
   const [errors, setErrros] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isUserAuthorized("jwt")) {
+      navigate(HOME)
+    }
+  }, [])
 
   const onRegistrationNumberChange = event => setRegistrationNumber(event.target.value);
   const onRegistrationPasswordChange = event => setRegistrationPassword(event.target.value);

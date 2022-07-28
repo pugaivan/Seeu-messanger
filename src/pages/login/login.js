@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+
 import Button from "../../components/button/button"
 import Input from "../../components/input/input"
 import PasswordInput from "../../components/passwordInput/passwordInput";
-import "./login.scss"
 import { validate } from "../../utils/validation";
 import { FORM_FIELDS, PATH } from "../../utils/constans"
 import { isObjectEmpty } from "../../utils/helper"
 import { loginUser } from "../../service/api";
+import { isUserAuthorized, createJwtToken } from "../../utils/localStorage";
 
-const { REGISER, MAIN } = PATH;
+import "./login.scss"
+
+const { REGISER, HOME } = PATH;
 const { PHONE, PASSWORD } = FORM_FIELDS;
 
 const Login = () => {
@@ -18,6 +21,13 @@ const Login = () => {
   const [errors, setErrros] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (isUserAuthorized("jwt")) {
+      navigate(HOME)
+    }
+  }, [])
 
   const onPhoneChange = (event) => setPhoneNumber(event.target.value);
   const onPasswordChange = (event) => setPassword(event.target.value);
@@ -43,8 +53,8 @@ const Login = () => {
         password
       })
       if (response.isSuccessful) {
-        localStorage.setItem('jwt', response.data.token)
-        navigate(MAIN)
+        createJwtToken('jwt', response.data.token)
+        navigate(HOME)
       } else {
         setErrorMessage(response.data.errorMessage)
       }
