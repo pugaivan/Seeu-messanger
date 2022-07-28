@@ -1,34 +1,33 @@
 export const isObjectEmpty = (obj) => {
-    return obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype
+  return obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype
 }
 
 export const parseErrorMessage = (error) => {
-    if (error?.response?.data?.errorMessage) {
-        return error.response.data.errorMessage
-    } else {
-        return 'Something went wrong, please try again later'
-    }
+  if (error?.response?.data?.errorMessage) {
+    return error.response.data.errorMessage
+  }
+  return 'Something went wrong, please try again later'
 }
 
 export const resizeSides = (container, leftPanel, rightPanel, drag) => {
-    let isResizing = false;
+  let isResizing = false
 
-    drag.current.onmousedown = function (e) {
-        isResizing = true;
-    };
+  drag.current.onmousedown = function () {
+    isResizing = true
+  }
 
-    document.onmousemove = function (e) {
-        if (!isResizing) {
-            return;
-        }
-
-        let offsetRight = container.current.clientWidth - (e.clientX - container.current.offsetLeft);
-
-        leftPanel.current.style.right = offsetRight + "px";
-        rightPanel.current.style.width = offsetRight + "px";
+  document.onmousemove = function (e) {
+    if (!isResizing) {
+      return
     }
 
-    document.onmouseup = function (e) {
-        isResizing = false;
-    }
+    let offsetRight = container.current.clientWidth - (e.clientX - container.current.offsetLeft)
+
+    leftPanel.current.style.right = offsetRight + 'px'
+    rightPanel.current.style.width = offsetRight + 'px'
+  }
+
+  document.onmouseup = function () {
+    isResizing = false
+  }
 }

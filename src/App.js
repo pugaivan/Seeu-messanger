@@ -1,12 +1,12 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Login from './pages/login/login'
 import Registration from './pages/registration/registration'
-import Home from './pages/index';
-import { PATH } from './utils/constans';
+import Home from './pages/index'
+import { PATH } from './utils/constans'
 
-import "./styles/variables.scss"
-import "./styles/global.scss"
+import './styles/variables.scss'
+import './styles/global.scss'
 
 const App = () => (
   <BrowserRouter>
@@ -18,4 +18,4 @@ const App = () => (
   </BrowserRouter>
 )
 
-export default App;
+export default App

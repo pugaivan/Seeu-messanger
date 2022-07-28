@@ -1,18 +1,16 @@
-import "./button.scss";
-import PropTypes from 'prop-types';
+import './button.scss'
+import PropTypes from 'prop-types'
 
 const Button = ({ text }) => {
-    return (
-        <div className="button-container">
-            <button>{text}</button>
-        </div>
-
-    )
+  return (
+    <div className="button-container">
+      <button>{text}</button>
+    </div>
+  )
 }
 
-
 Button.propTypes = {
-    text: PropTypes.string
-};
+  text: PropTypes.string,
+}
 
 export default Button

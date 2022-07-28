@@ -16,13 +16,17 @@
             "version": "detect"
         }
     },
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
+        "babelOptions": {
+            "parserOpts": {
+              "plugins": ["jsx"]
+            }
+          },
+    "requireConfigFile": false,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
     "rules": {
         "import/no-unresolved": "off",
         "consistent-return": "error",
