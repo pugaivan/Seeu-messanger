@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import useOnClickOutside from '../../hooks/useOnClickOutside'
 import './modal.scss'
 
-const Modal = ({ isActive, setIsActive, children, submit }) => {
+const Modal = ({ isActive, setIsActive, children, submit, textError }) => {
   const modalRef = useRef()
   useOnClickOutside(modalRef, () => setIsActive(false))
 
@@ -15,8 +15,13 @@ const Modal = ({ isActive, setIsActive, children, submit }) => {
         </button>
         {children}
         <div className="modal-footer">
-          <button onClick={submit}>Find</button>
-          <button onClick={() => setIsActive(false)}>Close</button>
+          <h4>{textError}</h4>
+          <button className="modal-buttons" onClick={submit}>
+            Find
+          </button>
+          <button className="modal-buttons" onClick={() => setIsActive(false)}>
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -28,6 +33,7 @@ Modal.propTypes = {
   children: PropTypes.node,
   submit: PropTypes.func,
   isActive: PropTypes.bool,
+  textError: PropTypes.string,
 }
 
 export default Modal

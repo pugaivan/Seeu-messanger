@@ -3,13 +3,16 @@ import Input from '../input/input'
 import Modal from '../modal/modal'
 import { validate } from '../../utils/validation'
 import { FORM_FIELDS } from '../../utils/constans'
+import { getNewContact } from '../../service/api'
+import { isObjectEmpty } from '../../utils/helper'
 
 const { PHONE } = FORM_FIELDS
 
 const Contacts = () => {
-  const [modalIsActive, setModalIsActive] = useState(false)
+  const [isModalActive, setModalIsActive] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState(null)
   const [errors, setErrros] = useState({})
+  const [errorMessage, setErrorMessage] = useState('')
   const onPhoneChange = (event) => setPhoneNumber(event.target.value)
 
   const modalSubmit = async (event) => {
@@ -25,6 +28,16 @@ const Contacts = () => {
       { ...errors },
     )
     setErrros({ ...validationErrors })
+
+    if (isObjectEmpty(validationErrors)) {
+      const response = await getNewContact({ phoneNumber })
+
+      if (response.isSuccessful) {
+        console.log('Success')
+      } else {
+        setErrorMessage(response.data.errorMessage)
+      }
+    }
   }
 
   return (
@@ -35,7 +48,12 @@ const Contacts = () => {
         </div>
         <div>contacts</div>
       </div>
-      <Modal isActive={modalIsActive} setIsActive={setModalIsActive} submit={modalSubmit}>
+      <Modal
+        isActive={isModalActive}
+        setIsActive={setModalIsActive}
+        submit={modalSubmit}
+        textError={errorMessage}
+      >
         <Input
           placeholder="Phone"
           id="phone-number"
