@@ -25,3 +25,17 @@ export const loginUser = async (data) => {
     return { data: { errorMessage: parseErrorMessage(error) } }
   }
 }
+
+export const getNewContact = async (data) => {
+  try {
+    const res = await apiCLient.post(`/contact`, data, {
+      headers: {
+        Authorization: localStorage.getItem('jwt'),
+      },
+    })
+
+    return { data: res.data, isSuccessful: true }
+  } catch (error) {
+    return { data: { errorMessage: parseErrorMessage(error) } }
+  }
+}
