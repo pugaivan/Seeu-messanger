@@ -9,7 +9,7 @@ import { isObjectEmpty } from '../../utils/helper'
 const { PHONE } = FORM_FIELDS
 
 const Contacts = () => {
-  const [modalIsActive, setModalIsActive] = useState(false)
+  const [isModalActive, setModalIsActive] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState(null)
   const [errors, setErrros] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
@@ -49,7 +49,7 @@ const Contacts = () => {
         <div>contacts</div>
       </div>
       <Modal
-        isActive={modalIsActive}
+        isActive={isModalActive}
         setIsActive={setModalIsActive}
         submit={modalSubmit}
         textError={errorMessage}
