@@ -39,3 +39,18 @@ export const getNewContact = async (data) => {
     return { data: { errorMessage: parseErrorMessage(error) } }
   }
 }
+
+export const getContacts = async () => {
+  try {
+    const res = await apiCLient.get(`/contacts`, {
+      headers: {
+        Authorization: localStorage.getItem('jwt'),
+      },
+    })
+    return res
+  } catch (err) {
+    return {
+      data: [],
+    }
+  }
+}
