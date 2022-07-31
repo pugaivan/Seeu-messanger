@@ -5,6 +5,7 @@ import { validate } from '../../utils/validation'
 import { FORM_FIELDS } from '../../utils/constans'
 import { getNewContact } from '../../service/api'
 import { isObjectEmpty } from '../../utils/helper'
+import ContactsList from '../contacts-list/contacts-list'
 
 const { PHONE } = FORM_FIELDS
 
@@ -46,7 +47,9 @@ const Contacts = () => {
         <div>
           <button onClick={() => setModalIsActive(true)}>Add new contact</button>
         </div>
-        <div>contacts</div>
+        <div>
+          <ContactsList />
+        </div>
       </div>
       <Modal
         isActive={isModalActive}
