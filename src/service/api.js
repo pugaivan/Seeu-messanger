@@ -47,10 +47,10 @@ export const getContacts = async () => {
         Authorization: localStorage.getItem('jwt'),
       },
     })
-    return res
+    return { res, isSuccessful: true }
   } catch (err) {
     return {
-      data: [],
+      isSuccessful: false,
     }
   }
 }
