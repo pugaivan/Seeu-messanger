@@ -20,7 +20,7 @@ const Contacts = () => {
 
   useEffect(() => {
     fetchСontacts()
-  }, [contacts])
+  }, [])
 
   async function fetchСontacts() {
     const response = await getContacts()
@@ -47,7 +47,8 @@ const Contacts = () => {
       const response = await getNewContact({ phoneNumber })
 
       if (response.isSuccessful) {
-        console.log('Success')
+        fetchСontacts()
+        setModalIsActive(false)
       } else {
         setErrorMessage(response.data.errorMessage)
       }
