@@ -33,6 +33,7 @@
         "no-else-return": "error",
         "eqeqeq": "error",
         "no-unused-vars": "warn",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [
             1,

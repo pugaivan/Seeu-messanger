@@ -1,19 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../input/input'
 import Modal from '../modal/modal'
 import { validate } from '../../utils/validation'
 import { FORM_FIELDS } from '../../utils/constans'
 import { getNewContact } from '../../service/api'
 import { isObjectEmpty } from '../../utils/helper'
+import ContactsList from '../contactList/contactsList'
+import { getContacts } from '../../service/api'
 
 const { PHONE } = FORM_FIELDS
 
 const Contacts = () => {
+  const [contacts, setContacts] = useState([])
   const [isModalActive, setModalIsActive] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState(null)
   const [errors, setErrros] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
   const onPhoneChange = (event) => setPhoneNumber(event.target.value)
+
+  useEffect(() => {
+    fetchСontacts()
+  }, [])
+
+  async function fetchСontacts() {
+    const response = await getContacts()
+    if (response.isSuccessful) {
+      setContacts(response.res.data.users)
+    }
+  }
 
   const modalSubmit = async (event) => {
     event.preventDefault()
@@ -33,7 +47,8 @@ const Contacts = () => {
       const response = await getNewContact({ phoneNumber })
 
       if (response.isSuccessful) {
-        console.log('Success')
+        fetchСontacts()
+        setModalIsActive(false)
       } else {
         setErrorMessage(response.data.errorMessage)
       }
@@ -46,7 +61,7 @@ const Contacts = () => {
         <div>
           <button onClick={() => setModalIsActive(true)}>Add new contact</button>
         </div>
-        <div>contacts</div>
+        <ContactsList contacts={contacts} />
       </div>
       <Modal
         isActive={isModalActive}

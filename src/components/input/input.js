@@ -34,7 +34,9 @@ Input.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
-  errors: PropTypes.object,
+  errors: PropTypes.shape({
+    name: PropTypes.string,
+  }),
   name: PropTypes.string,
   children: PropTypes.node,
 }
