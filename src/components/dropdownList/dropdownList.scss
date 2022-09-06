@@ -1,0 +1,31 @@
+.dropdown-menu-button{
+    background-color: grey;
+    border: none;
+    position: absolute;
+    right: 2%;
+    transform: translate(0, -50%);
+    top: 50%;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: 150px;
+    z-index: 2;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+    background-color: white;
+  
+    &.is-dropdownShow{
+      display: block;
+    }
+  }
+  
+  .dropdown ul li {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0px;
+  }

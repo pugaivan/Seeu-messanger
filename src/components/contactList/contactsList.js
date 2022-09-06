@@ -6,7 +6,7 @@ import './contactsList.scss'
 
 const ContactsList = ({ contacts }) => {
   return (
-    <ul>
+    <ul className="contact-list">
       {contacts.map((item, index) => (
         <li key={index}>
           <ListItem item={item} />
