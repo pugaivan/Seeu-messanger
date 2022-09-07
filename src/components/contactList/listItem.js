@@ -3,15 +3,16 @@ import React from 'react'
 import DropdownList from '../dropdownList/dropdownList'
 import { DEFAULT_ICON_SIZE } from '../../utils/constans'
 import PropTypes from 'prop-types'
+import { deleteContact } from '../../service/api'
 
 import './listItem.scss'
 
 const ListItem = ({ item }) => {
-  const { first_name, last_name } = item
+  const { first_name, last_name, id } = item
 
-  const deleteContact = (e) => {
-    e.stopPropagation()
-    console.log('delete')
+  const deleteContactUser = (event) => {
+    event.stopPropagation()
+    deleteContact({ contactId: id })
   }
 
   return (
@@ -21,7 +22,7 @@ const ListItem = ({ item }) => {
         <span>{last_name}</span>
         <DropdownList>
           <li>
-            <div className="dropdown-menu-trash-button" onClick={deleteContact}>
+            <div className="dropdown-menu-trash-button" onClick={(event) => deleteContactUser(event)}>
               {/*need use "button" instead of "div" but i didn't fond solution*/}
               <span>Delete contact</span>
               <img
@@ -45,6 +46,7 @@ ListItem.propTypes = {
   item: PropTypes.shape({
     first_name: PropTypes.string,
     last_name: PropTypes.string,
+    id: PropTypes.number,
   }),
 }
 

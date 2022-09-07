@@ -54,3 +54,14 @@ export const getContacts = async () => {
     }
   }
 }
+
+export const deleteContact = async (data) => {
+  try {
+    const res = await apiCLient.post(`/deleteContact`, data)
+    return { isSuccessful: true }
+  } catch (err) {
+    return {
+      isSuccessful: false,
+    }
+  }
+}
