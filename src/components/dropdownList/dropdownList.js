@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import PropTypes from 'prop-types'
 import { DEFAULT_ICON_SIZE } from '../../utils/constans'
+import useOnClickOutside from '../../hooks/useOnClickOutside'
 
 import './dropdownList.scss'
 
 const DropdownList = ({ children }) => {
   const [isDropDownListShow, setIsDropDownListShow] = useState(false)
-
+  const dropDownRef = useRef()
+  useOnClickOutside(dropDownRef, () => setIsDropDownListShow(false))
   const showDropdownList = () => {
     setIsDropDownListShow(!isDropDownListShow)
   }
@@ -21,7 +23,7 @@ const DropdownList = ({ children }) => {
           width={DEFAULT_ICON_SIZE}
           height={DEFAULT_ICON_SIZE}
         />
-        <div className={`dropdown ${isDropDownListShow && 'is-dropdownShow'}`}>
+        <div ref={dropDownRef} className={`dropdown ${isDropDownListShow && 'is-dropdownShow'}`}>
           <ul className="drop-down-list"> {children} </ul>
         </div>
       </button>

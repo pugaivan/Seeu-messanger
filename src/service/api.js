@@ -57,10 +57,11 @@ export const getContacts = async () => {
 
 export const deleteContact = async (data) => {
   try {
-    const res = await apiCLient.post(`/deleteContact`, data, {
+    const res = await apiCLient.delete(`/deleteContact`, {
       headers: {
         Authorization: localStorage.getItem('jwt'),
       },
+      data,
     })
     return { isSuccessful: true }
   } catch (err) {

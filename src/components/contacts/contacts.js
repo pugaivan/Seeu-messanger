@@ -5,8 +5,9 @@ import { validate } from '../../utils/validation'
 import { FORM_FIELDS } from '../../utils/constans'
 import { getNewContact } from '../../service/api'
 import { isObjectEmpty } from '../../utils/helper'
-import ContactsList from '../contactList/contactsList'
+import ListItem from '../listItem/listItem'
 import { getContacts } from '../../service/api'
+import { deleteContact } from '../../service/api'
 
 const { PHONE } = FORM_FIELDS
 
@@ -27,6 +28,11 @@ const Contacts = () => {
     if (response.isSuccessful) {
       setContacts(response.res.data.users)
     }
+  }
+
+  const deleteContactUser = async (id) => {
+    await deleteContact({ contactId: id })
+    fetchСontacts()
   }
 
   const modalSubmit = async (event) => {
@@ -61,7 +67,13 @@ const Contacts = () => {
         <div>
           <button onClick={() => setModalIsActive(true)}>Add new contact</button>
         </div>
-        <ContactsList contacts={contacts} />
+        <ul className="contact-list">
+          {contacts.map((item, index) => (
+            <li key={index}>
+              <ListItem item={item} onDeleteContact={deleteContactUser} />
+            </li>
+          ))}
+        </ul>
       </div>
       <Modal
         isActive={isModalActive}
