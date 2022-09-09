@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import DropdownList from '../dropdownList/dropdownList'
-import { DEFAULT_ICON_SIZE } from '../../utils/constans'
-import PropTypes from 'prop-types'
+import { DEFAULT_ICON_SIZE, PATH } from '../../utils/constans'
+const { IMAGES } = PATH
 
 import './listItem.scss'
 
@@ -19,13 +20,13 @@ const ListItem = ({ item, onDeleteContact }) => {
         <span>{first_name}</span>
         <span>{last_name}</span>
         <DropdownList>
-          <li>
+          <li className="dropdown-list-item">
             <div className="dropdown-menu-trash-button" onClick={onDeleteClick}>
               {/*need use "button" instead of "div" but i didn't fond solution*/}
               <span>Delete contact</span>
               <img
                 className="dropdown-menu-list"
-                src="/images/trash.png"
+                src={`${IMAGES}trash.png`}
                 width={DEFAULT_ICON_SIZE}
                 height={DEFAULT_ICON_SIZE}
               />

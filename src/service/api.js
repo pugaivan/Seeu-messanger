@@ -57,7 +57,7 @@ export const getContacts = async () => {
 
 export const deleteContact = async (data) => {
   try {
-    const res = await apiCLient.delete(`/deleteContact`, {
+    const res = await apiCLient.delete(`/contact`, {
       headers: {
         Authorization: localStorage.getItem('jwt'),
       },

@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
-
 import PropTypes from 'prop-types'
-import { DEFAULT_ICON_SIZE } from '../../utils/constans'
+
 import useOnClickOutside from '../../hooks/useOnClickOutside'
+import { DEFAULT_ICON_SIZE, PATH } from '../../utils/constans'
+const { IMAGES } = PATH
 
 import './dropdownList.scss'
 
@@ -19,7 +20,7 @@ const DropdownList = ({ children }) => {
       <button onClick={showDropdownList} className="dropdown-menu-button">
         <img
           className="dropdown-menu-list"
-          src="/images/dropdownList.svg"
+          src={`${IMAGES}dropdownList.svg`}
           width={DEFAULT_ICON_SIZE}
           height={DEFAULT_ICON_SIZE}
         />
