@@ -1,0 +1,42 @@
+.user-info{
+  display: flex;
+  gap:5px;
+}
+
+.user-info{
+  display: flex;
+}
+
+.user-container{
+  border: 2px solid white;
+  position: relative;
+}
+
+.dropdown-menu-list{
+    position: absolute;
+    right: 2%;
+    transform: translate(0, -50%);
+    top: 50%;
+}
+
+.dropdown-menu-trash-button{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu-trash-button span{
+  position: relative;
+  right: 25px;
+}
+
+.contact-list {
+  padding: 0 10px;
+
+  .contact-list-item {
+    list-style: none;
+    margin: 25px 0px;
+  }
+}
+
+

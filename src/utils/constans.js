@@ -9,6 +9,7 @@ export const PATH = {
   LOGIN: '/login',
   REGISER: '/registration',
   HOME: '/',
+  IMAGES: '/images/',
 }
 
 export const DEFAULT_ICON_SIZE = '24px'

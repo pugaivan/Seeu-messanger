@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+
 import Input from '../input/input'
 import Modal from '../modal/modal'
+import ListItem from '../listItem/listItem'
+
 import { validate } from '../../utils/validation'
 import { FORM_FIELDS } from '../../utils/constans'
-import { getNewContact } from '../../service/api'
 import { isObjectEmpty } from '../../utils/helper'
-import ContactsList from '../contactList/contactsList'
-import { getContacts } from '../../service/api'
+import { deleteContact, getContacts, getNewContact } from '../../service/api'
 
 const { PHONE } = FORM_FIELDS
 
@@ -26,6 +27,13 @@ const Contacts = () => {
     const response = await getContacts()
     if (response.isSuccessful) {
       setContacts(response.res.data.users)
+    }
+  }
+
+  const deleteContactUser = async (id) => {
+    const response = await deleteContact({ contactId: id })
+    if (response.isSuccessful) {
+      fetchСontacts()
     }
   }
 
@@ -61,7 +69,13 @@ const Contacts = () => {
         <div>
           <button onClick={() => setModalIsActive(true)}>Add new contact</button>
         </div>
-        <ContactsList contacts={contacts} />
+        <ul className="contact-list">
+          {contacts.map((item) => (
+            <li key={item.id} className="contact-list-item">
+              <ListItem item={item} onDeleteContact={deleteContactUser} />
+            </li>
+          ))}
+        </ul>
       </div>
       <Modal
         isActive={isModalActive}
